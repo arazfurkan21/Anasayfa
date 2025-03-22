@@ -1,98 +1,140 @@
+
 <!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cihaz, IP ve Konum Bilgileri</title>
-</head>
-<body>
-    <h2>Kullanıcı Cihaz, IP ve Konum Bilgileri</h2>
+<html>
+    <head>
+        <title>Page Title</title>
+    </head>
+    <body> <style>
+        
+        body {
+    
+}
 
-    <h3>IP Adresiniz:</h3>
-    <p id="ip">Yükleniyor...</p>
+ul{
+    position:relative ;
+    transform:skewY(-15deg);
+    top:175px;
+    left:62.5px;
+    
+   }
 
-    <h3>Cihaz Bilgileri:</h3>
-    <p id="deviceInfo">Yükleniyor...</p>
+li{
+    position:relative ;
+    list-style:none;
+    width:200px;
+    padding:15px;
+    background:#3e3f46;
+    transition:0.5s;
+}
 
-    <h3>Konum Bilgileriniz:</h3>
-    <p id="location">Yükleniyor...</p>
+li:hover{
+    background:#996ffe;
+    transform:translateX(-50px);
+}
 
-    <script>
-        // IP Adresini Al
-        function getIP(ipADDR) {
-            document.getElementById("ip").innerText = "IP Adresiniz: " + ipADDR.ip;
-        }
+li::before{
+    font-family:FontAwesome;
+    color:#999;
+    display:flex;
+    justify-content :center;
+    align-items:center ;
+    content:attr(data-icon);
+    position:absolute ;
+    top:0px;
+    left:-40px;
+    width:40px;
+    height:100%;
+    background:#2e3133;
+    transform-origin:right;
+    transform:skewY(45deg);
+    transition:0.5s;
+}
 
-        // Cihaz Bilgilerini Al
-        function getDeviceInfo() {
-            let memory = navigator.deviceMemory || "Bilinmiyor"; // RAM bilgisi
-            let cores = navigator.hardwareConcurrency || "Bilinmiyor"; // İşlemci çekirdek sayısı
-            let onlineStatus = navigator.onLine ? "Bağlı" : "Bağlı Değil"; // İnternet bağlantı durumu
-            let batteryInfo = "Bilgi alınamıyor"; // Batarya bilgisini varsayılan olarak "Bilgi alınamıyor" yapıyoruz
+li:hover::before{
+    background:#7b5190;
+}
 
-            // Batarya bilgisini al
-            if (navigator.getBattery) {
-                navigator.getBattery().then(battery => {
-                    batteryInfo = `Şarj Durumu: ${(battery.level * 100).toFixed(0)}% | ${battery.charging ? "Şarj Oluyor" : "Şarj Olmuyor"}`;
-                    showDeviceInfo();
-                });
-            } else {
-                showDeviceInfo();
-            }
+li::after{
+    content:"";
+    position:absolute ;
+    top:-40px;
+    left:0px;
+    width:100%;
+    height:40px;
+    background:#35383e;
+    transform-origin:bottom ;
+    transform:skewX(45deg);
+    transition:0.5s;
+}
 
-            function showDeviceInfo() {
-                let info = `
-                    Tarayıcı: ${navigator.userAgent} <br>
-                    Platform: ${navigator.platform} <br>
-                    Dil: ${navigator.language} <br>
-                    Çözünürlük: ${screen.width}x${screen.height} <br>
-                    RAM: ${memory} GB <br>
-                    İşlemci Çekirdek Sayısı: ${cores} <br>
-                    İnternet Durumu: ${onlineStatus} <br>
-                    ${batteryInfo}
-                `;
-                document.getElementById("deviceInfo").innerHTML = info;
-            }
-        }
+li:hover::after{
+    background:#86589d;
+}
 
-        // Kullanıcı Konumunu Al
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                document.getElementById("location").innerText = "Geolocation API desteklenmiyor.";
-            }
-        }
+li a{
+    text-decoration:none;
+    color:#999;
+    display:block;
+    text-transform:uppercase ;
+    letter-spacing:0.05em;
+    transition:0.5s;
+}
 
-        function showPosition(position) {
-            let latitude = position.coords.latitude;
-            let longitude = position.coords.longitude;
-            document.getElementById("location").innerText = `Enlem: ${latitude}° | Boylam: ${longitude}°`;
-        }
+li:hover a{
+    color:#fff;
+}
 
-        function showError(error) {
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    document.getElementById("location").innerText = "Kullanıcı konum erişimini reddetti.";
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    document.getElementById("location").innerText = "Konum bilgisi mevcut değil.";
-                    break;
-                case error.TIMEOUT:
-                    document.getElementById("location").innerText = "Konum alırken zaman aşımına uğradı.";
-                    break;
-                default:
-                    document.getElementById("location").innerText = "Bir hata oluştu.";
-                    break;
-            }
-        }
+li:last-child::after{
+    
+    box-shadow: -120px 120px 20px rgba(0,0,0,0.25);
+}
 
-        // IP adresi ve cihaz bilgilerini al
-        getDeviceInfo();
-        getLocation();
-    </script>
+.a{
+    z-index:6;
+}
 
-    <!-- IP adresini almak için ipify API -->
-    <script src="https://api.ipify.org/?format=jsonp&callback=getIP"></script>
-</body>
+.b{
+    z-index:5;
+}
+
+.c{
+    z-index:4;
+}
+
+.d{
+    z-index:3;
+}
+
+.e{
+    z-index:2;
+}
+
+.f{
+    z-index:1;
+}
+        
+        
+        
+    </style>
+        <ul>
+            <li class="a" data-icon="&#9885">
+                <a>Home</a>
+            </li>
+            <li class="b" data-icon="&#9885">
+                <a>About</a>
+            </li>
+            <li class="c" data-icon="&#9885">
+                <a>Services</a>
+            </li>
+            <li class="d" data-icon="&#9885">
+                <a>Portfolio</a>
+            </li>
+            <li class="e" data-icon="&#9885">
+                <a>Our Team</a>
+            </li>
+            <li class="f" data-icon="&#9885">
+                <a href="https://arazfurkan21.github.io/Hakkimda/">Hakkımda</a>
+            </li>
+        </ul>
+    </body>
 </html>
